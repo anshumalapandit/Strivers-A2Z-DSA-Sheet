@@ -1,3 +1,5 @@
+“Yes, I can remove the HashMap and use a switch-case function instead of map lookups, which reduces object creation overhead and may improve performance slightly.”
+
 class Solution {
     public int romanToInt(String s) {
         HashMap<Character,Integer> map=new HashMap<>();
