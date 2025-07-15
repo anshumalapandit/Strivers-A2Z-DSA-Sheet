@@ -1,0 +1,43 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+ import java.util.*;
+class Solution {
+    public void flatten(TreeNode root) {
+        if(root==null){
+            return;
+        }
+        Stack<TreeNode> s=new Stack<>();
+        s.push(root);
+        while(!s.isEmpty()){
+            TreeNode cur=s.peek();
+            s.pop();
+            // now add its cur right to stack back like queue
+            if(cur.right!=null){
+                s.push(cur.right);
+            }
+            if(cur.left!=null){
+                s.push(cur.left);
+            }
+            // linking part
+            if(!s.isEmpty()){
+                // cur node k right side mai attack kardo jo top mai hai
+                cur.right=s.peek();
+            }
+            // attach null to left
+            cur.left=null;
+        }
+    }
+}
