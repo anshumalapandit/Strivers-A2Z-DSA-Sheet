@@ -47,3 +47,46 @@ class Solution {
         return delete(head,sizeLL,n);
     }
 }
+// optimised: /**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+    // if i have single node
+    if(head.next==null){
+        head=null;
+        return head;
+    }
+     ListNode slow=head;
+     ListNode fast=head;
+     // lets move fast pointer to n step
+     while(n!=0){
+        fast=fast.next;
+        n--;
+     }
+     //when n == length of list (i.e., you need to delete the head)
+     if(fast==null){
+        // u need to delete head itself 
+        head=head.next;
+        return head;
+     }
+     while(fast.next!=null){
+        slow=slow.next;
+        fast=fast.next;
+     }
+     // now u reached just before ur deleting node go delete it
+     if(slow.next.next!=null){
+        slow.next=slow.next.next;
+     }else{
+        slow.next=null;
+     }
+     return head;
+    }
+}
